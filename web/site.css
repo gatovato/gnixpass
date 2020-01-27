@@ -1,0 +1,8 @@
+html body {
+  background-color: #212121;
+  color: white;
+  height: 100vh;
+}
+.first-row{
+  margin-top: 10vh;
+}

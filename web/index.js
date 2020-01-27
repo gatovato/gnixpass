@@ -10,7 +10,7 @@ function createPass(){
       <label for="password" class="mt-1">Password</label>
       <input type="password" class="form-control" id="password" placeholder="Password">
       <label for="confpassword" class="mt-1">Confirm Password</label>
-      <input type="repassword" class="form-control" id="confpassword" placeholder="Confirm Password">
+      <input type="password" class="form-control" id="confpassword" placeholder="Confirm Password">
       <button type="button" class="btn btn-primary mt-3">Save</button>
   </div>
   `

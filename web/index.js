@@ -1,7 +1,3 @@
-//var myList = [];
-//eel.getPasses()(x => myList = x)
-
-
 function newPass(){
   var passForm = `
   <div id="newPass">
@@ -10,7 +6,7 @@ function newPass(){
       <label for="password" class="mt-1">Password</label>
       <input type="password" class="form-control" id="password" placeholder="Password">
       <label for="confpassword" class="mt-1">Confirm Password</label>
-      <input type="repassword" class="form-control" id="confpassword" placeholder="Confirm Password">
+      <input type="password" class="form-control" id="confpassword" placeholder="Confirm Password">
       <div class="invalid-feedback">Passwords do not match</div>
       <button type="button" onclick="createPass()" class="btn btn-primary mt-3">Save</button>
   </div>
@@ -57,16 +53,15 @@ async function getPasses() {
 
 async function createPass(){
   passForm = document.querySelector('#newPass');
+  passName = document.querySelector('#passName');
   pass = document.querySelector('#password');
   conf = document.querySelector('#confpassword');
   if (pass.value != conf.value){
     conf.classList.add('is-invalid');
   }
-  let success = await eel.createPass(name,pass);
-  if(success){
-    console.log('win');
-  }else {
-    console.log('fail');
+  let fail = await eel.createPass(passName.value,conf.value)();
+  if(fail){
+    alert('An unexpected error has occurred, please try again later');
   }
 }
 

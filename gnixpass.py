@@ -59,17 +59,17 @@ def getPasses():
         return []
 
 @eel.expose
-def createPass(name,pass):
-    myData = encrypt(pass,'{}')
+def createPass(name,passwd):
+    myData = encrypt(passwd,'{}')
     newPass = gnix_home + '/' + name
     myFile = open(newPass,'w')
     error = False
     try:
-        myFile.write(myData)
+        myFile.write(myData.decode())
     except:
         error = True
     finally:
         myFile.close()
     return error
-        
+
 eel.start('index.html',mode='chrome')

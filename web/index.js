@@ -2,16 +2,17 @@
 //eel.getPasses()(x => myList = x)
 
 
-function createPass(){
+function newPass(){
   var passForm = `
-  <div>
+  <div id="newPass">
       <label for="passName" class="mt-1">Store name</label>
       <input id="passName" class="form-control" type="text" placeholder="Store name">
       <label for="password" class="mt-1">Password</label>
       <input type="password" class="form-control" id="password" placeholder="Password">
       <label for="confpassword" class="mt-1">Confirm Password</label>
       <input type="repassword" class="form-control" id="confpassword" placeholder="Confirm Password">
-      <button type="button" class="btn btn-primary mt-3">Save</button>
+      <div class="invalid-feedback">Passwords do not match</div>
+      <button type="button" onclick="createPass()" class="btn btn-primary mt-3">Save</button>
   </div>
   `
   document.getElementById('template').innerHTML = passForm;
@@ -50,10 +51,24 @@ async function getPasses() {
     var option = document.createElement("option");
     option.text = "Add a new pass";
     passes.add(option);
-    createPass();
+    newPass();
   }
 }
 
+async function createPass(){
+  passForm = document.querySelector('#newPass');
+  pass = document.querySelector('#password');
+  conf = document.querySelector('#confpassword');
+  if (pass.value != conf.value){
+    conf.classList.add('is-invalid');
+  }
+  let success = await eel.createPass(name,pass);
+  if(success){
+    console.log('win');
+  }else {
+    console.log('fail');
+  }
+}
 
 getPasses();
 
@@ -63,6 +78,6 @@ dropDown.addEventListener('change',function(event){
     if(myValue !="Add a new pass"){
       authenticate();
     }else{
-      createPass();
+      newPass();
     }
 });

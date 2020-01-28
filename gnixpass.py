@@ -9,6 +9,8 @@ from cryptography.hazmat.primitives import padding
 
 
 user_home = str(Path.home())+'/'
+gnix_home = user_home + '.gnixpass'
+
 eel.init('web')
 
 #Functions
@@ -49,12 +51,25 @@ def decrypt(myPass,myData):
 
 @eel.expose
 def getPasses():
-    if os.path.isdir(user_home + '.gnixpass'):
-        pass_files = os.listdir(user_home + '.gnixpass')
+    if os.path.isdir(gnix_home):
+        pass_files = os.listdir(gnix_home)
         return pass_files
     else:
-        os.mkdir(user_home + '.gnixpass')
+        os.mkdir(gnix_home)
         return []
 
-
+@eel.expose
+def createPass(name,pass):
+    myData = encrypt(pass,'{}')
+    newPass = gnix_home + '/' + name
+    myFile = open(newPass,'w')
+    error = False
+    try:
+        myFile.write(myData)
+    except:
+        error = True
+    finally:
+        myFile.close()
+    return error
+        
 eel.start('index.html',mode='chrome')

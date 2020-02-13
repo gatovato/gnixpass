@@ -1,29 +1,32 @@
 import os
 import base64
+import json
 from pathlib import Path
 import eel
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import padding
 
-
-
+#Filepath
 user_home = str(Path.home())+'/'
 gnix_home = user_home + '.gnixpass'
 
 eel.init('web')
 
-#Functions
+ ######################
+ # Internal Functions #
+ ######################
+
 def padData(data):
     padder = padding.PKCS7(128).padder()
     padded_data = padder.update(data)
     padded_data += padder.finalize()
     return padded_data
 
-def unPadData(unpadded_data):
+def unPadData(padded_data):
     unpadder = padding.PKCS7(128).unpadder()
-    cleaned = unpadder.update(unpadded_data)
-    cleaned + unpadder.finalize()
+    cleaned = unpadder.update(padded_data)
+    cleaned = cleaned + unpadder.finalize()
     return cleaned
 
 def encrypt(password, data):
@@ -37,9 +40,9 @@ def encrypt(password, data):
     to_file = iv+ct
     return base64.b64encode(to_file)
 
-def decrypt(myPass,myData):
-    key = padData(myPass.encode())
-    data = base64.b64decode(myData)
+def decrypt(password,data):
+    key = padData(password.encode())
+    data = base64.b64decode(data)
     iv = data[:16]
     data = data.replace(iv,b'')
     backend = default_backend()
@@ -49,6 +52,12 @@ def decrypt(myPass,myData):
     unpadded_data = unPadData(padded_data)
     return unpadded_data.decode()
 
+
+######################
+# External Functions #
+######################
+
+#Populate Home page dropdown
 @eel.expose
 def getPasses():
     if os.path.isdir(gnix_home):
@@ -60,16 +69,26 @@ def getPasses():
 
 @eel.expose
 def createPass(name,passwd):
-    myData = encrypt(passwd,'{}')
-    newPass = gnix_home + '/' + name
-    myFile = open(newPass,'w')
+    my_data = encrypt(passwd,'{}')
+    new_pass = gnix_home + '/' + name
+    my_file = open(new_pass,'w')
     error = False
     try:
-        myFile.write(myData.decode())
+        my_file.write(my_data.decode())
     except:
         error = True
     finally:
-        myFile.close()
+        my_file.close()
     return error
 
+@eel.expose
+def openPass(name,passwd):
+    file_path = gnix_home + '/' + name
+    my_file = open(file_path,'r')
+    encoded_data = my_file.read()
+    my_file.close()
+    data = decrypt(passwd,encoded_data)
+    return data
+
+#Runtime
 eel.start('index.html',mode='chrome')

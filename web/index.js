@@ -62,6 +62,8 @@ async function createPass(){
   let fail = await eel.createPass(passName.value,conf.value)();
   if(fail){
     alert('An unexpected error has occurred, please try again later');
+  }else{
+    location.reload();
   }
 }
 

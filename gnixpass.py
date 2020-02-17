@@ -1,8 +1,14 @@
+###########################
+#      Gnixpass 1.0       #
+#       -gatovato-        #
+###########################
+
+#Imports
 import os
 import base64
 import json
-from pathlib import Path
 import eel
+from pathlib import Path
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import padding
@@ -53,9 +59,9 @@ def decrypt(password,data):
     return unpadded_data.decode()
 
 
-######################
-# External Functions #
-######################
+ ######################
+ # External Functions #
+ ######################
 
 #Populate Home page dropdown
 @eel.expose
@@ -87,7 +93,10 @@ def openPass(name,passwd):
     my_file = open(file_path,'r')
     encoded_data = my_file.read()
     my_file.close()
-    data = decrypt(passwd,encoded_data)
+    try:
+        data = decrypt(passwd,encoded_data)
+    except:
+        data = ""
     return data
 
 #Runtime

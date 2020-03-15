@@ -9,13 +9,31 @@
     <link rel="stylesheet" href="/site.css">
   </head>
   <body>
+    <div id="confirmRm" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Warning</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Data loss etc...</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" onclick="rmPass()">Delete</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <nav class="navbar navbar-dark bg-dark">
       <img src="/gnixpass.png" class="img-fluid mx-auto"/>
     </nav>
     <div class="container">
       <div class="row first-row">
         <div class="col">
-          <form>
             <div class="form-group">
               <label for="pass-files">Choose a store or create a new one</label>
               <select id="pass-files" class="form-control">
@@ -23,7 +41,6 @@
             </div>
             <div id="template" class="form-group">
             </div>
-          </form>
         </div>
       </div>
     </div>

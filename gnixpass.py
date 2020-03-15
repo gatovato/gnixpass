@@ -90,14 +90,43 @@ def createPass(name,passwd):
 @eel.expose
 def openPass(name,passwd):
     file_path = gnix_home + '/' + name
-    my_file = open(file_path,'r')
-    encoded_data = my_file.read()
-    my_file.close()
+    try:
+        my_file = open(file_path,'r')
+        encoded_data = my_file.read()
+        my_file.close()
+    except:
+        data = 'open_failed'
+        return data
     try:
         data = decrypt(passwd,encoded_data)
     except:
-        data = ""
+        data = 'decrypt_failed'
+        return data
     return data
+
+@eel.expose
+def rmPass(name,passwd):
+    file_path = gnix_home + '/' + name
+    try:
+        my_file = open(file_path,'r')
+        encoded_data = my_file.read()
+        my_file.close()
+    except:
+        data = 'delete_failed'
+        return data
+    try:
+        data = decrypt(passwd,encoded_data)
+    except:
+        data = 'decrypt_failed'
+        return data
+    try:
+        os.remove(file_path)
+    except:
+        data = 'delete_failed'
+        return data
+    data = 'success'
+    return data
+
 
 #Runtime
 eel.start('index.html',mode='chrome')

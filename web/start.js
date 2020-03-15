@@ -1,4 +1,7 @@
+////////////////////////////////////////////////////////////////
+//Views
 //Two views initially available - onto next js after either of these
+
 function newPassView(){
   var passForm = `
   <div id="newPass">
@@ -19,19 +22,24 @@ function authenticateView(){
   var authForm = `
   <div>
       <label for="password" class="mt-1">Password</label>
-      <div class="input-group">
-        <input type="password" class="form-control" id="password" placeholder="Password">
-        <div class="invalid-feedback">
-            Password is invalid
+      <input type="password" class="form-control" id="password" placeholder="Password">
+      <div class="invalid-feedback">Password is invalid</div>
+      <div class="row">
+        <div class="col-3">
+          <button type="button" class="btn btn-primary mt-3" onclick="openPass()">Open</button>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3">
+          <button type="button" class="btn btn-danger mt-3 float-right" data-toggle="modal" data-target="#confirmRm">Delete</button>
         </div>
       </div>
-      <button type="button" class="btn btn-primary mt-3" onclick="openPass()">Open</button>
   </div>
   `
   document.getElementById('template').innerHTML = authForm;
 }
+
 ////////////////////////////////////////////////////////////////
-//Functions
+//Workers
 
 //Populate dropdown
 async function getPasses() {
@@ -59,20 +67,6 @@ async function getPasses() {
   }
 }
 
-getPasses();
-
-//Change between create pass and authenticate screens
-dropDown = document.getElementById("pass-files");
-dropDown.addEventListener('change',function(event){
-    var myValue = event.srcElement.value;
-    if(myValue !="Add a new pass"){
-      authenticateView();
-    }else{
-      newPassView();
-    }
-});
-
-
 //One of the two actions when using the dropdown
 async function createPass(){
   passForm = document.querySelector('#newPass');
@@ -90,14 +84,56 @@ async function createPass(){
   }
 }
 
-//Send credentials to eel, if good send to next js, if bad validate
+//send to eel for authentication and deletion
+async function rmPass(){
+  name = document.getElementById('pass-files').value;
+  passwd = document.getElementById('password').value;
+  let status = await eel.rmPass(name,passwd)();
+  console.log(status);
+  if(status == "decrypt_failed"){
+    document.getElementById('password').classList.add("is-invalid");
+    $('#confirmRm').modal('toggle');
+    return;
+  }
+  if(status == "delete_failed"){
+    alert('Unknown error deleting password file');
+    $('#confirmRm').modal('toggle');
+    return;
+  }
+  if(status == "success"){
+    location.reload();
+  }
+}
+
+ //Send credentials to eel, if good send to next js, if bad validate
 async function openPass(){
   name = document.getElementById('pass-files').value;
   passwd = document.getElementById('password').value;
-  let passFile = await eel.openPass(name,passwd)();
-  if(passFile == ""){
+  let contents = await eel.openPass(name,passwd)();
+  if(contents == "open_failed"){
+    alert('Unknown error opening password file');
+  }else if(contents == "decrypt_failed"){
     document.getElementById('password').classList.add("is-invalid");
   }else{
-    //pass onto next js file
+    passFile = JSON.parse(contents);
+    //send to edit.js
   }
 }
+
+////////////////////////////////////////////////////////////////
+//Main
+
+var passFile = '';
+
+getPasses();
+
+//Change between create pass and authenticate screens
+dropDown = document.getElementById("pass-files");
+dropDown.addEventListener('change',function(event){
+    var myValue = event.srcElement.value;
+    if(myValue !="Add a new pass"){
+      authenticateView();
+    }else{
+      newPassView();
+    }
+});

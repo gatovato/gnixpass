@@ -6,3 +6,7 @@ html body {
 .first-row{
   margin-top: 10vh;
 }
+.modal-content{
+  background-color: #212121;
+  color: white;
+}

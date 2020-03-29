@@ -1,6 +1,19 @@
 ////////////////////////////////////////////////////////////////
 //Views
 //Two views initially available - onto next js after either of these
+function startView(){
+  var startForm = `
+  <div class="form-group">
+    <label for="pass-files">Choose a store or create a new one</label>
+    <select id="pass-files" class="form-control">
+    </select>
+  </div>
+  <div id="auth-or-add" class="form-group">
+  </div>
+  `
+  document.getElementById('template').innerHTML = startForm;
+}
+
 
 function newPassView(){
   var passForm = `
@@ -15,7 +28,7 @@ function newPassView(){
       <button type="button" onclick="createPass()" class="btn btn-primary mt-3">Save</button>
   </div>
   `
-  document.getElementById('template').innerHTML = passForm;
+  document.getElementById('auth-or-add').innerHTML = passForm;
 }
 
 function authenticateView(){
@@ -35,7 +48,7 @@ function authenticateView(){
       </div>
   </div>
   `
-  document.getElementById('template').innerHTML = authForm;
+  document.getElementById('auth-or-add').innerHTML = authForm;
 }
 
 ////////////////////////////////////////////////////////////////
@@ -117,14 +130,14 @@ async function openPass(){
   }else{
     passFile = JSON.parse(contents);
     //send to edit.js
+    editView();
   }
 }
 
 ////////////////////////////////////////////////////////////////
 //Main
-
+startView();
 var passFile = '';
-
 getPasses();
 
 //Change between create pass and authenticate screens

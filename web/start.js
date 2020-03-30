@@ -136,7 +136,10 @@ async function openPass(){
 
 ////////////////////////////////////////////////////////////////
 //Main
+//variables used by other files will be defined here, these will
+//get defaulted when the password file is saved and the page reloads
 startView();
+var origPassFile = '';
 var passFile = '';
 getPasses();
 

@@ -67,5 +67,11 @@ function addCredForm(){
 
 //Add credentails to pass file
 function addCred(){
+  name = document.getElementById('cred-name').value;
+  user = document.getElementById('cred-username').value;
+  pass = document.getElementById('cred-password').value;
+  smolObj = {};
+  smolObj[user] = pass;
+  passFile[name] = smolObj;
   document.getElementById('add-cred-form').innerHTML= '';
 }

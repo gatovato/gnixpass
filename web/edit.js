@@ -42,7 +42,13 @@ function editView(){
       </div>
     </div>
     `
-    var editForm = addHTMLString(tmpHTML);
+    var addButton = addHTMLString(tmpHTML);
+    document.getElementById('edit-container').appendChild(addButton);
+
+    var tmpHTML = '<div id="add-form" class="row"></div>';
+    var addForm = addHTMLString(tmpHTML);
+    document.getElementById('edit-container').appendChild(addForm);
+    genAccordian();
   }
 }
 
@@ -74,4 +80,41 @@ function addCred(){
   smolObj[user] = pass;
   passFile[name] = smolObj;
   document.getElementById('add-cred-form').innerHTML= '';
+  genAccordian();
+}
+
+//Generate accordian
+function genAccordian(){
+  if(document.getElementById('credList')){
+    document.getElementById('credList').remove();
+  }
+  accordianStr = '<div class="accordion col-12" id="credList"></div>';
+  accordian = addHTMLString(accordianStr);
+  document.getElementById('creds-panel').appendChild(accordian);
+  ct = 0;
+  for(name in passFile){
+    for(key in passFile[name]){
+        tmpStr = `
+        <div class="card">
+          <div class="card-header" id="header${ct}">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse${ct}" aria-expanded="false" aria-controls="#collapse${ct}">
+                ${name}
+              </button>
+            </h2>
+          </div>
+          <div id="collapse${ct}" class="collapse" aria-labelledby="header${ct}" data-parent="#credList">
+            <div class="card-body">
+              ${key}
+              <br>
+              ${passFile[name][key]}
+            </div>
+          </div>
+        </div>
+        `;
+        card = addHTMLString(tmpStr);
+        document.getElementById('credList').appendChild(card);
+        ct++;
+    }
+  }
 }

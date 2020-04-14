@@ -12,4 +12,25 @@ html body {
 }
 .card{
   color:black;
+  background-color: #474747;
+}
+.card-header{
+  background-color: #2e2e2e;
+}
+.btn-link{
+  color: white;
+  text-decoration: none;
+}
+.btn-link:hover {
+    color: #474747;
+    text-decoration: none;
+}
+.btn-link:focus {
+  text-decoration: none;
+}
+.table-dark{
+  background-color: #545454
+}
+.table-dark td, .table-dark th, .table-dark thead th{
+  border-color:#3a3a3a;
 }

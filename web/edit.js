@@ -20,7 +20,7 @@ function editView(){
   prepEditView();
   if(Object.keys(passFile).length === 0){
     var tmpHTML = `
-    <div class="row">
+    <div class="row mt-3">
       <div class="col-9"></div>
       <div class="col-3">
         <button type="button" class="btn btn-success btn-sm float-right" onclick="addCredForm()"><b><h2>&nbsp;&nbsp;+&nbsp;&nbsp;</h2></b></button>
@@ -35,7 +35,7 @@ function editView(){
     document.getElementById('edit-container').appendChild(addForm);
   }else{
     var tmpHTML = `
-    <div class="row">
+    <div class="row mt-3">
       <div class="col-9"></div>
       <div class="col-3">
         <button type="button" class="btn btn-success btn-sm float-right" onclick="addCredForm()"><b><h2>&nbsp;&nbsp;+&nbsp;&nbsp;</h2></b></button>
@@ -76,6 +76,11 @@ function addCred(){
   name = document.getElementById('cred-name').value;
   user = document.getElementById('cred-username').value;
   pass = document.getElementById('cred-password').value;
+  conf = document.getElementById('cred-conf-password');
+  if (pass != conf.value){
+    conf.classList.add('is-invalid');
+    return;
+  }
   smolObj = {};
   smolObj[user] = pass;
   passFile[name] = smolObj;
@@ -105,9 +110,20 @@ function genAccordian(){
           </div>
           <div id="collapse${ct}" class="collapse" aria-labelledby="header${ct}" data-parent="#credList">
             <div class="card-body">
-              ${key}
-              <br>
-              ${passFile[name][key]}
+              <table class="table table-bordered table-dark">
+                <thead>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Username</th>
+                    <td>${key}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Password</th>
+                    <td>${passFile[name][key]}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

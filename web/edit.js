@@ -21,9 +21,12 @@ function editView(){
   if(Object.keys(passFile).length === 0){
     var tmpHTML = `
     <div class="row mt-3">
-      <div class="col-9"></div>
+      <div class="col-6"></div>
       <div class="col-3">
-        <button type="button" class="btn btn-success btn-sm float-right" onclick="addCredForm()"><b><h2>&nbsp;&nbsp;+&nbsp;&nbsp;</h2></b></button>
+        <button type="button" class="btn btn-primary btn-sm float-right" onclick=""><img class="save" src="/save-24px.svg"/></button>
+      </div>
+      <div class="col-3">
+        <button type="button" class="btn btn-success btn-sm float-right" onclick="addCredForm()"><img class="add" src="/add_box-24px.svg"/></button>
       </div>
     </div>
     `
@@ -71,7 +74,7 @@ function addCredForm(){
   document.getElementById('add-form').innerHTML = tmpHTML;
 }
 
-//Add credentails to pass file
+//Add credentials to pass file
 function addCred(){
   name = document.getElementById('cred-name').value;
   user = document.getElementById('cred-username').value;

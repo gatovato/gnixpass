@@ -34,9 +34,30 @@ html body {
 .table-dark td, .table-dark th, .table-dark thead th{
   border-color:#3a3a3a;
 }
-.save{
- filter: invert(91%) sepia(11%) saturate(6566%) hue-rotate(6deg) brightness(93%) contrast(98%);
+.icon{
+  filter: invert(6%) sepia(9%) saturate(793%) hue-rotate(251deg) brightness(95%) contrast(91%);
 }
-.add{
-  filter: invert(47%) sepia(11%) saturate(2397%) hue-rotate(227deg) brightness(87%) contrast(97%);
+.btn-save{
+  background-color: #516AEC;
+}
+.btn-add{
+  background-color: #379A37;
+}
+.btn-open{
+  background-color: #159393;
+}
+.btn-delete{
+  background-color: #CA402B;
+}
+.form-control{
+  color:white;
+  background-color:#474747;
+}
+.form-control:hover{
+  color:white;
+  background-color:#474747;
+}
+.form-control:focus{
+  color:white;
+  background-color:#474747;
 }

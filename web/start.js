@@ -19,13 +19,14 @@ function newPassView(){
   var passForm = `
   <div id="newPass">
       <label for="passName" class="mt-1">Store name</label>
-      <input id="passName" class="form-control" type="text" placeholder="Store name">
+      <input id="passName" class="form-control" type="text">
+      <div class="invalid-feedback">Store name is required</div>
       <label for="password" class="mt-1">Password</label>
-      <input type="password" class="form-control" id="password" placeholder="Password">
+      <input type="password" class="form-control" id="password">
       <label for="confpassword" class="mt-1">Confirm Password</label>
-      <input type="password" class="form-control" id="confpassword" placeholder="Confirm Password">
+      <input type="password" class="form-control" id="confpassword">
       <div class="invalid-feedback">Passwords do not match</div>
-      <button type="button" onclick="createPass()" class="btn btn-primary mt-3">Save</button>
+      <button type="button" class="btn btn-save btn-sm mt-3 float-right" onclick="createPass()"><img class="icon" src="/save-24px.svg"/></button>
   </div>
   `
   document.getElementById('auth-or-add').innerHTML = passForm;
@@ -35,15 +36,15 @@ function authenticateView(){
   var authForm = `
   <div>
       <label for="password" class="mt-1">Password</label>
-      <input type="password" class="form-control" id="password" placeholder="Password">
+      <input type="password" class="form-control" id="password">
       <div class="invalid-feedback">Password is invalid</div>
       <div class="row">
         <div class="col-3">
-          <button type="button" class="btn btn-primary mt-3" onclick="openPass()">Open</button>
+          <button type="button" class="btn btn-open btn-sm mt-3" onclick="openPass()"><img class="icon" src="/lock_open-24px.svg"/></button>
         </div>
         <div class="col-6"></div>
         <div class="col-3">
-          <button type="button" class="btn btn-danger mt-3 float-right" data-toggle="modal" data-target="#confirmRm">Delete</button>
+          <button type="button" class="btn btn-delete btn-sm mt-3 float-right" data-toggle="modal" data-target="#confirmRm"><img class="icon" src="/delete-24px.svg"/></button>
         </div>
       </div>
   </div>
@@ -88,6 +89,10 @@ async function createPass(){
   conf = document.querySelector('#confpassword');
   if (pass.value != conf.value){
     conf.classList.add('is-invalid');
+  }
+  if (passName.value == ''){
+    passName.classList.add('is-invalid');
+    return;
   }
   let fail = await eel.createPass(passName.value,conf.value)();
   if(fail){

@@ -1,11 +1,11 @@
-//transform HTML strings into elements
+//Transform HTML strings into elements
 function addHTMLString(tmpStr){
     var tmpDiv = document.createElement('div');
     tmpDiv.innerHTML = tmpStr;
     return tmpDiv.firstElementChild;
 }
 
-//create skeleton for Edit View
+//Create skeleton for Edit View
 function prepEditView(){
   var startEdit =`
   <div id="edit-container">
@@ -23,10 +23,10 @@ function editView(){
     <div class="row mt-3">
       <div class="col-6"></div>
       <div class="col-3">
-        <button type="button" class="btn btn-primary btn-sm float-right" onclick=""><img class="save" src="/save-24px.svg"/></button>
+        <button type="button" class="btn btn-save btn-sm float-right" onclick=""><img class="icon" src="/save-24px.svg"/></button>
       </div>
       <div class="col-3">
-        <button type="button" class="btn btn-success btn-sm float-right" onclick="addCredForm()"><img class="add" src="/add_box-24px.svg"/></button>
+        <button type="button" class="btn btn-success btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/add_box-24px.svg"/></button>
       </div>
     </div>
     `
@@ -39,9 +39,12 @@ function editView(){
   }else{
     var tmpHTML = `
     <div class="row mt-3">
-      <div class="col-9"></div>
+      <div class="col-6"></div>
       <div class="col-3">
-        <button type="button" class="btn btn-success btn-sm float-right" onclick="addCredForm()"><b><h2>&nbsp;&nbsp;+&nbsp;&nbsp;</h2></b></button>
+        <button type="button" class="btn btn-save btn-sm float-right" onclick=""><img class="icon" src="/save-24px.svg"/></button>
+      </div>
+      <div class="col-3">
+        <button type="button" class="btn btn-success btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/add_box-24px.svg"/></button>
       </div>
     </div>
     `
@@ -60,15 +63,15 @@ function addCredForm(){
   var tmpHTML = `
   <div id="add-cred-form" class="col-12">
     <label for="cred-name" class="mt-1">Name</label>
-    <input id="cred-name" class="form-control" type="text" placeholder="Name">
+    <input id="cred-name" class="form-control" type="text">
     <label for="cred-username" class="mt-1">Username</label>
-    <input id="cred-username" class="form-control" type="text" placeholder="Username">
+    <input id="cred-username" class="form-control" type="text">
     <label for="cred-password" class="mt-1">Password</label>
-    <input id="cred-password" type="password" class="form-control" placeholder="Password">
+    <input id="cred-password" type="password" class="form-control">
     <label for="cred-conf-password" class="mt-1">Confirm Password</label>
-    <input id="cred-conf-password" type="password" class="form-control" placeholder="Confirm Password">
+    <input id="cred-conf-password" type="password" class="form-control">
     <div class="invalid-feedback">Passwords do not match</div>
-    <button type="button" onclick="addCred()" class="btn btn-primary mt-3">Add</button>
+    <button type="button" onclick="addCred()" class="btn btn-add mt-3"><img class="icon" src="/add-24px.svg"/></button>
   </div>
   `
   document.getElementById('add-form').innerHTML = tmpHTML;
@@ -127,6 +130,7 @@ function genAccordian(){
                   </tr>
                 </tbody>
               </table>
+              <button type="button" onclick="addCred()" class="btn btn-delete btn-sm mb-3 float-right"><img class="icon" src="/delete-24px.svg"/></button>
             </div>
           </div>
         </div>

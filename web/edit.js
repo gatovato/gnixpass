@@ -23,10 +23,10 @@ function editView(){
     <div class="row mt-3">
       <div class="col-6"></div>
       <div class="col-3">
-        <button type="button" class="btn btn-save btn-sm float-right" onclick=""><img class="icon" src="/save-24px.svg"/></button>
+        <button type="button" class="btn btn-save btn-sm float-right" onclick=""><img class="icon" src="/img/save-24px.svg"/></button>
       </div>
       <div class="col-3">
-        <button type="button" class="btn btn-success btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/add_box-24px.svg"/></button>
+        <button type="button" class="btn btn-success btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/img/add_box-24px.svg"/></button>
       </div>
     </div>
     `
@@ -41,10 +41,10 @@ function editView(){
     <div class="row mt-3">
       <div class="col-6"></div>
       <div class="col-3">
-        <button type="button" class="btn btn-save btn-sm float-right" onclick=""><img class="icon" src="/save-24px.svg"/></button>
+        <button type="button" class="btn btn-save btn-sm float-right" onclick=""><img class="icon" src="/img/save-24px.svg"/></button>
       </div>
       <div class="col-3">
-        <button type="button" class="btn btn-success btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/add_box-24px.svg"/></button>
+        <button type="button" class="btn btn-success btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/img/add_box-24px.svg"/></button>
       </div>
     </div>
     `
@@ -62,16 +62,21 @@ function editView(){
 function addCredForm(){
   var tmpHTML = `
   <div id="add-cred-form" class="col-12">
-    <label for="cred-name" class="mt-1">Name</label>
-    <input id="cred-name" class="form-control" type="text">
+    <div>
+      <label for="cred-name" class="mt-1">Name</label>
+      <input id="cred-name" class="form-control" type="text">
+      <div class="invalid-feedback">Name is required</div>
+    </div>
     <label for="cred-username" class="mt-1">Username</label>
     <input id="cred-username" class="form-control" type="text">
     <label for="cred-password" class="mt-1">Password</label>
     <input id="cred-password" type="password" class="form-control">
-    <label for="cred-conf-password" class="mt-1">Confirm Password</label>
-    <input id="cred-conf-password" type="password" class="form-control">
-    <div class="invalid-feedback">Passwords do not match</div>
-    <button type="button" onclick="addCred()" class="btn btn-add mt-3"><img class="icon" src="/add-24px.svg"/></button>
+    <div>
+      <label for="cred-conf-password" class="mt-1">Confirm Password</label>
+      <input id="cred-conf-password" type="password" class="form-control">
+      <div class="invalid-feedback">Passwords do not match</div>
+    </div>
+    <button type="button" onclick="addCred()" class="btn btn-add mt-3"><img class="icon" src="/img/add-24px.svg"/></button>
   </div>
   `
   document.getElementById('add-form').innerHTML = tmpHTML;
@@ -79,7 +84,7 @@ function addCredForm(){
 
 //Add credentials to pass file
 function addCred(){
-  name = document.getElementById('cred-name').value;
+  entryName = document.getElementById('cred-name');
   user = document.getElementById('cred-username').value;
   pass = document.getElementById('cred-password').value;
   conf = document.getElementById('cred-conf-password');
@@ -87,9 +92,13 @@ function addCred(){
     conf.classList.add('is-invalid');
     return;
   }
+  if (entryName.value == ''){
+    entryName.classList.add('is-invalid');
+    return;
+  }
   smolObj = {};
   smolObj[user] = pass;
-  passFile[name] = smolObj;
+  passFile[entryName.value] = smolObj;
   document.getElementById('add-cred-form').innerHTML= '';
   genAccordian();
 }
@@ -130,7 +139,7 @@ function genAccordian(){
                   </tr>
                 </tbody>
               </table>
-              <button type="button" onclick="addCred()" class="btn btn-delete btn-sm mb-3 float-right"><img class="icon" src="/delete-24px.svg"/></button>
+              <button type="button" onclick="addCred()" class="btn btn-delete btn-sm mb-3 float-right"><img class="icon" src="/img/delete-24px.svg"/></button>
             </div>
           </div>
         </div>

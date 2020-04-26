@@ -103,6 +103,12 @@ function addCred(){
   genAccordian();
 }
 
+//Remove credentials from passFile
+function rmCred(rmName){
+  delete passFile[rmName];
+  genAccordian();
+}
+
 //Generate accordian
 function genAccordian(){
   if(document.getElementById('credList')){
@@ -139,7 +145,7 @@ function genAccordian(){
                   </tr>
                 </tbody>
               </table>
-              <button type="button" onclick="addCred()" class="btn btn-delete btn-sm mb-3 float-right"><img class="icon" src="/img/delete-24px.svg"/></button>
+              <button type="button" onclick="rmCred('${name}')" class="btn btn-delete btn-sm mb-3 float-right"><img class="icon" src="/img/delete-24px.svg"/></button>
             </div>
           </div>
         </div>

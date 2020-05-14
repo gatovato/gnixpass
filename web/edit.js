@@ -26,7 +26,7 @@ function editView(){
         <button type="button" class="btn btn-save btn-sm float-right" onclick=""><img class="icon" src="/img/save-24px.svg"/></button>
       </div>
       <div class="col-3">
-        <button type="button" class="btn btn-success btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/img/add_box-24px.svg"/></button>
+        <button type="button" class="btn btn-add btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/img/add_box-24px.svg"/></button>
       </div>
     </div>
     `
@@ -44,7 +44,7 @@ function editView(){
         <button type="button" class="btn btn-save btn-sm float-right" onclick=""><img class="icon" src="/img/save-24px.svg"/></button>
       </div>
       <div class="col-3">
-        <button type="button" class="btn btn-success btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/img/add_box-24px.svg"/></button>
+        <button type="button" class="btn btn-add btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/img/add_box-24px.svg"/></button>
       </div>
     </div>
     `
@@ -76,10 +76,23 @@ function addCredForm(){
       <input id="cred-conf-password" type="password" class="form-control">
       <div class="invalid-feedback">Passwords do not match</div>
     </div>
-    <button type="button" onclick="addCred()" class="btn btn-add mt-3"><img class="icon" src="/img/add-24px.svg"/></button>
+    <div class="row mt-3">
+      <div class="col-6"></div>
+      <div class="col-3">
+        <button type="button" class="btn btn-add btn-sm float-right" onclick="addCred()"><img class="icon" src="/img/add-24px.svg"/></button>
+      </div>
+      <div class="col-3">
+        <button type="button" class="btn btn-delete btn-sm float-right" onclick="hideCredForm()"><img class="icon" src="/img/cancel-24px.svg"/></button>
+      </div>
+    </div>
   </div>
   `
   document.getElementById('add-form').innerHTML = tmpHTML;
+}
+
+//Hide the add cred form
+function hideCredForm(){
+  document.getElementById('add-cred-form').innerHTML= '';
 }
 
 //Add credentials to pass file
@@ -99,7 +112,7 @@ function addCred(){
   smolObj = {};
   smolObj[user] = pass;
   passFile[entryName.value] = smolObj;
-  document.getElementById('add-cred-form').innerHTML= '';
+  hideCredForm();
   genAccordian();
 }
 

@@ -126,6 +126,7 @@ async function rmPass(){
  //Send credentials to eel, if good send to next js, if bad validate
 async function openPass(){
   name = document.getElementById('pass-files').value;
+  origPassFile = name
   passwd = document.getElementById('password').value;
   let contents = await eel.openPass(name,passwd)();
   if(contents == "open_failed"){

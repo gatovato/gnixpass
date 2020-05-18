@@ -21,7 +21,10 @@ function editView(){
   if(Object.keys(passFile).length === 0){
     var tmpHTML = `
     <div class="row mt-3">
-      <div class="col-6"></div>
+      <div class="col-3"></div>
+      <div class="col-3">
+        <button type="button" class="btn btn-home btn-sm float-right" onclick="startView()"><img class="icon" src="/img/home-24px.svg"/></button>
+      </div>
       <div class="col-3">
         <button type="button" class="btn btn-save btn-sm float-right" onclick=""><img class="icon" src="/img/save-24px.svg"/></button>
       </div>
@@ -39,7 +42,10 @@ function editView(){
   }else{
     var tmpHTML = `
     <div class="row mt-3">
-      <div class="col-6"></div>
+      <div class="col-3"></div>
+      <div class="col-3">
+        <button type="button" class="btn btn-home btn-sm float-right" onclick=""><img class="icon" src="/img/home-24px.svg"/></button>
+      </div>
       <div class="col-3">
         <button type="button" class="btn btn-save btn-sm float-right" onclick=""><img class="icon" src="/img/save-24px.svg"/></button>
       </div>

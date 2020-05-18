@@ -37,17 +37,24 @@ html body {
 .icon{
   filter: invert(6%) sepia(9%) saturate(793%) hue-rotate(251deg) brightness(95%) contrast(91%);
 }
+.btn:focus{
+  border-color: #2e2e2e;
+  box-shadow: none;
+}
+.btn-home{
+  background-color: #FFCC66;
+}
 .btn-save{
-  background-color: #516AEC;
+  background-color: #6699CC;
 }
 .btn-add{
-  background-color: #379A37;
+  background-color: #99CC99;
 }
 .btn-open{
-  background-color: #516AEC;
+  background-color: #66CCCC;
 }
 .btn-delete{
-  background-color: #CA402B;
+  background-color: #F2777A;
 }
 .form-control{
   color:white;
@@ -60,4 +67,6 @@ html body {
 .form-control:focus{
   color:white;
   background-color:#474747;
+  border-color: #cccccc;
+  box-shadow: none;
 }

@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////
 //Views
 //Two views initially available - onto next js after either of these
-function startView(){
+function prepStartView(){
   var startForm = `
   <div class="form-group">
     <label for="pass-files">Choose a store or create a new one</label>
@@ -15,24 +15,31 @@ function startView(){
 }
 
 
-function newPassView(){
+function newPassForm(){
   var passForm = `
   <div id="newPass">
-      <label for="passName" class="mt-1">Store name</label>
-      <input id="passName" class="form-control" type="text">
-      <div class="invalid-feedback">Store name is required</div>
-      <label for="password" class="mt-1">Password</label>
-      <input type="password" class="form-control" id="password">
-      <label for="confpassword" class="mt-1">Confirm Password</label>
-      <input type="password" class="form-control" id="confpassword">
-      <div class="invalid-feedback">Passwords do not match</div>
+      <div>
+        <label for="passName" class="mt-1">Store name</label>
+        <input id="passName" class="form-control" type="text">
+        <div class="invalid-feedback">Store name is required</div>
+      </div>
+      <div>
+        <label for="password" class="mt-1">Password</label>
+        <input type="password" class="form-control" id="password">
+        <div class="invalid-feedback">Password is required</div>
+      </div>
+      <div>
+        <label for="confpassword" class="mt-1">Confirm Password</label>
+        <input type="password" class="form-control" id="confpassword">
+        <div class="invalid-feedback">Passwords do not match</div>
+      </div>
       <button type="button" class="btn btn-save btn-sm mt-3 float-right" onclick="createPass()"><img class="icon" src="/img/save-24px.svg"/></button>
   </div>
   `
   document.getElementById('auth-or-add').innerHTML = passForm;
 }
 
-function authenticateView(){
+function authForm(){
   var authForm = `
   <div>
       <label for="password" class="mt-1">Password</label>
@@ -70,14 +77,14 @@ async function getPasses() {
     var option = document.createElement("option");
     option.text = "Add a new pass";
     passes.add(option);
-    authenticateView();
+    authForm();
   }
   if(n.length == 0){
     passes = document.getElementById("pass-files");
     var option = document.createElement("option");
     option.text = "Add a new pass";
     passes.add(option);
-    newPassView();
+    newPassForm();
   }
 }
 
@@ -87,8 +94,13 @@ async function createPass(){
   passName = document.querySelector('#passName');
   pass = document.querySelector('#password');
   conf = document.querySelector('#confpassword');
+  if (pass.value == '' && conf.value == ''){
+    pass.classList.add('is-invalid');
+    return;
+  }
   if (pass.value != conf.value){
     conf.classList.add('is-invalid');
+    return;
   }
   if (passName.value == ''){
     passName.classList.add('is-invalid');
@@ -140,22 +152,28 @@ async function openPass(){
   }
 }
 
+//Add it all together
+function startView(){
+  prepStartView();
+  getPasses();
+  var origPassFile = '';
+  var passFile = '';
+  //Change between create pass and authenticate screens
+  dropDown = document.getElementById("pass-files");
+  dropDown.addEventListener('change',function(event){
+      var myValue = event.srcElement.value;
+      if(myValue != "Add a new pass"){
+        authForm();
+      }else{
+        newPassForm();
+      }
+  });
+}
+
 ////////////////////////////////////////////////////////////////
 //Main
 //variables used by other files will be defined here, these will
 //get defaulted when the password file is saved and the page reloads
-startView();
 var origPassFile = '';
 var passFile = '';
-getPasses();
-
-//Change between create pass and authenticate screens
-dropDown = document.getElementById("pass-files");
-dropDown.addEventListener('change',function(event){
-    var myValue = event.srcElement.value;
-    if(myValue !="Add a new pass"){
-      authenticateView();
-    }else{
-      newPassView();
-    }
-});
+startView();

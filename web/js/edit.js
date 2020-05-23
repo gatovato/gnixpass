@@ -164,6 +164,7 @@ function genAccordian(){
                   </tr>
                 </tbody>
               </table>
+              <button type="button" class="btn btn-save btn-sm mb-3" data-toggle="modal" data-target="#editCard" onclick="prepEditCard('${name}')"><img class="icon" src="/img/edit-24px.svg"/></button>
               <button type="button" onclick="rmCred('${name}')" class="btn btn-delete btn-sm mb-3 float-right"><img class="icon" src="/img/delete-24px.svg"/></button>
             </div>
           </div>
@@ -174,4 +175,28 @@ function genAccordian(){
         ct++;
     }
   }
+}
+
+function prepEditCard(tmpName){
+  var tmpTitle = `Edit ${tmpName}`;
+  document.getElementById('editCardTitle').innerHTML = tmpTitle;
+  var tmpCardForm = `
+    <div>
+      <label for="card-cred-name" class="mt-1">Name</label>
+      <input id="card-cred-name" class="form-control" type="text">
+      <div class="invalid-feedback">Name is required</div>
+    </div>
+    <label for="card-cred-username" class="mt-1">Username</label>
+    <input id="card-cred-username" class="form-control" type="text">
+    <label for="card-cred-password" class="mt-1">Password</label>
+    <input id="card-cred-password" type="password" class="form-control">
+    <div>
+      <label for="card-cred-conf-password" class="mt-1">Confirm Password</label>
+      <input id="card-cred-conf-password" type="password" class="form-control">
+      <div class="invalid-feedback">Passwords do not match</div>
+    </div>
+    `;
+  document.getElementById('editCardBody').innerHTML = tmpCardForm;
+  var tmpFunct = `editCard('${tmpName}')`;
+  document.getElementById('editCardSave').setAttribute("onclick",tmpFunct);
 }

@@ -199,4 +199,35 @@ function prepEditCard(tmpName){
   document.getElementById('editCardBody').innerHTML = tmpCardForm;
   var tmpFunct = `editCard('${tmpName}')`;
   document.getElementById('editCardSave').setAttribute("onclick",tmpFunct);
+  document.getElementById('card-cred-name').value = tmpName;
+  for(key in passFile[tmpName]){
+      document.getElementById('card-cred-username').value = key;
+      document.getElementById('card-cred-password').value = passFile[tmpName][key];
+      document.getElementById('card-cred-conf-password').value = passFile[tmpName][key];
+  }
+}
+
+function editCard(tmpName){
+  entryName = document.getElementById('card-cred-name');
+  user = document.getElementById('card-cred-username').value;
+  pass = document.getElementById('card-cred-password').value;
+  conf = document.getElementById('card-cred-conf-password');
+  if (pass != conf.value){
+    conf.classList.add('is-invalid');
+    return;
+  }
+  if (entryName.value == ''){
+    entryName.classList.add('is-invalid');
+    return;
+  }
+  smolObj = {};
+  smolObj[user] = pass;
+  if(entryName.value == tmpName){
+    passFile[tmpName] = smolObj;
+  }else{
+    delete passFile[tmpName];
+    passFile[entryName.value] = smolObj;
+  }
+  genAccordian();
+  $('#editCard').modal('toggle');
 }

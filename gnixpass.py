@@ -127,6 +127,9 @@ def rmPass(name,passwd):
     data = 'success'
     return data
 
-
+@eel.expose
+def savePass(name,data,passwd):
+    print(data)
+    
 #Runtime
 eel.start('index.html',mode='chrome')

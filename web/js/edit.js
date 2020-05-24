@@ -231,3 +231,8 @@ function editCard(tmpName){
   genAccordian();
   $('#editCard').modal('toggle');
 }
+
+function savePass(){
+  passwd = 'woa';
+  let test = eel.savePass(origPassFile,passFile,passwd)();
+}

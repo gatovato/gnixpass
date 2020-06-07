@@ -26,7 +26,7 @@ function editView(){
         <button type="button" class="btn btn-sgcustom btn-home btn-sm float-right" onclick="exitEdit()"><img class="icon" src="/img/home-24px.svg"/></button>
       </div>
       <div class="col-3">
-        <button type="button" class="btn btn-sgcustom btn-save btn-sm float-right" onclick="savePass()"><img class="icon" src="/img/save-24px.svg"/></button>
+        <button type="button" class="btn btn-sgcustom btn-save btn-sm float-right" data-toggle="modal" data-target="#savePass" onclick="prepSaveModal()"><img class="icon" src="/img/save-24px.svg"/></button>
       </div>
       <div class="col-3">
         <button type="button" class="btn btn-sgcustom btn-add btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/img/add_box-24px.svg"/></button>
@@ -47,7 +47,7 @@ function editView(){
         <button type="button" class="btn btn-sgcustom btn-home btn-sm float-right" onclick="exitEdit()"><img class="icon" src="/img/home-24px.svg"/></button>
       </div>
       <div class="col-3">
-        <button type="button" class="btn btn-sgcustom btn-save btn-sm float-right" onclick="savePass()"><img class="icon" src="/img/save-24px.svg"/></button>
+        <button type="button" class="btn btn-sgcustom btn-save btn-sm float-right" data-toggle="modal" data-target="#savePass" onclick="prepSaveModal()"><img class="icon" src="/img/save-24px.svg"/></button>
       </div>
       <div class="col-3">
         <button type="button" class="btn btn-sgcustom btn-add btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/img/add_box-24px.svg"/></button>
@@ -232,9 +232,44 @@ function editCard(tmpName){
   $('#editCard').modal('toggle');
 }
 
-function savePass(){
-  passwd = 'woa';
-  let test = eel.savePass(origPassFile,passFile,passwd)();
+function prepSaveModal(){
+  var tmpFunct = `savePass('${origPassFile}')`;
+  document.getElementById('savePassSave').setAttribute("onclick",tmpFunct);
+}
+
+function cleanSaveModal(){
+  pass = document.getElementById('savePassword');
+  conf = document.getElementById('confSavePassword');
+  if(pass.classList.contains('is-invalid')){
+    pass.classList.remove('is-invalid');
+  }
+  if(conf.classList.contains('is-invalid')){
+    conf.classList.remove('is-invalid');
+  }
+  pass.value = '';
+  conf.value = '';
+}
+
+async function savePass(){
+  pass = document.getElementById('savePassword');
+  conf = document.getElementById('confSavePassword');
+  if(!pass.value && !conf.value){
+    pass.classList.add('is-invalid');
+    return;
+  }
+  if (pass.value != conf.value){
+    conf.classList.add('is-invalid');
+    return;
+  }
+  let error = await eel.savePass(origPassFile,JSON.stringify(passFile),pass.value)();
+  if(error){
+    alert('Uknown I/O error has occurred');
+  }
+  $('#savePass').modal('toggle');
+  cleanSaveModal();
+  passFile = '';
+  origPassFile = '';
+  startView();
 }
 
 function exitEdit(){

@@ -23,8 +23,8 @@
             <p>Data loss etc...</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-delete" onclick="rmPass()">Delete</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-sgcustom btn-delete" onclick="rmPass()">Delete</button>
+            <button type="button" class="btn btn-sgcustom btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -40,8 +40,36 @@
           </div>
           <div id="editCardBody" class="modal-body"></div>
           <div class="modal-footer">
-            <button  id="editCardSave" type="button" class="btn btn-save"><img class="icon" src="/img/save-24px.svg"/></button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button  id="editCardSave" type="button" class="btn btn-sgcustom btn-save"><img class="icon" src="/img/save-24px.svg"/></button>
+            <button type="button" class="btn btn-sgcustom btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="savePass" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="savePassTitle" class="modal-title"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="savePassBody" class="modal-body">
+            <div>
+              <label for="savePassword" class="mt-1">Password</label>
+              <input type="password" class="form-control" id="savePassword">
+              <div class="invalid-feedback">Password is required</div>
+            </div>
+            <div>
+              <label for="confSavePassword" class="mt-1">Confirm Password</label>
+              <input type="password" class="form-control" id="confSavePassword">
+              <div class="invalid-feedback">Passwords do not match</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button  id="savePassSave" type="button" class="btn btn-sgcustom btn-save"><img class="icon" src="/img/save-24px.svg"/></button>
+            <button type="button" class="btn btn-sgcustom btn-secondary" data-dismiss="modal" onclick="cleanSaveModal()">Close</button>
           </div>
         </div>
       </div>

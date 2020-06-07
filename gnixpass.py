@@ -128,8 +128,19 @@ def rmPass(name,passwd):
     return data
 
 @eel.expose
-def savePass(name,data,passwd):
-    print(data)
-    
+def savePass(name,user_data,passwd):
+    my_data = encrypt(passwd,user_data)
+    file_path = gnix_home + '/' + name
+    my_file = open(file_path,'w')
+    error = False
+    try:
+        my_file.write(my_data.decode())
+    except:
+        error = True
+    finally:
+        my_file.close()
+    return error
+
+
 #Runtime
 eel.start('index.html',mode='chrome')

@@ -119,7 +119,6 @@ async function rmPass(){
   name = document.getElementById('pass-files').value;
   passwd = document.getElementById('password').value;
   let status = await eel.rmPass(name,passwd)();
-  console.log(status);
   if(status == "decrypt_failed"){
     document.getElementById('password').classList.add("is-invalid");
     $('#confirmRm').modal('toggle');

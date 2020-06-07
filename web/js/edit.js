@@ -23,13 +23,13 @@ function editView(){
     <div class="row mt-3">
       <div class="col-3"></div>
       <div class="col-3">
-        <button type="button" class="btn btn-home btn-sm float-right" onclick="exitEdit()"><img class="icon" src="/img/home-24px.svg"/></button>
+        <button type="button" class="btn btn-sgcustom btn-home btn-sm float-right" onclick="exitEdit()"><img class="icon" src="/img/home-24px.svg"/></button>
       </div>
       <div class="col-3">
-        <button type="button" class="btn btn-save btn-sm float-right" onclick=""><img class="icon" src="/img/save-24px.svg"/></button>
+        <button type="button" class="btn btn-sgcustom btn-save btn-sm float-right" onclick=""><img class="icon" src="/img/save-24px.svg"/></button>
       </div>
       <div class="col-3">
-        <button type="button" class="btn btn-add btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/img/add_box-24px.svg"/></button>
+        <button type="button" class="btn btn-sgcustom btn-add btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/img/add_box-24px.svg"/></button>
       </div>
     </div>
     `
@@ -44,13 +44,13 @@ function editView(){
     <div class="row mt-3">
       <div class="col-3"></div>
       <div class="col-3">
-        <button type="button" class="btn btn-home btn-sm float-right" onclick="exitEdit()"><img class="icon" src="/img/home-24px.svg"/></button>
+        <button type="button" class="btn btn-sgcustom btn-home btn-sm float-right" onclick="exitEdit()"><img class="icon" src="/img/home-24px.svg"/></button>
       </div>
       <div class="col-3">
-        <button type="button" class="btn btn-save btn-sm float-right" onclick=""><img class="icon" src="/img/save-24px.svg"/></button>
+        <button type="button" class="btn btn-sgcustom btn-save btn-sm float-right" onclick=""><img class="icon" src="/img/save-24px.svg"/></button>
       </div>
       <div class="col-3">
-        <button type="button" class="btn btn-add btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/img/add_box-24px.svg"/></button>
+        <button type="button" class="btn btn-sgcustom btn-add btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/img/add_box-24px.svg"/></button>
       </div>
     </div>
     `
@@ -85,10 +85,10 @@ function addCredForm(){
     <div class="row mt-3">
       <div class="col-6"></div>
       <div class="col-3">
-        <button type="button" class="btn btn-add btn-sm float-right" onclick="addCred()"><img class="icon" src="/img/add-24px.svg"/></button>
+        <button type="button" class="btn btn-sgcustom btn-add btn-sm float-right" onclick="addCred()"><img class="icon" src="/img/add-24px.svg"/></button>
       </div>
       <div class="col-3">
-        <button type="button" class="btn btn-delete btn-sm float-right" onclick="hideCredForm()"><img class="icon" src="/img/cancel-24px.svg"/></button>
+        <button type="button" class="btn btn-sgcustom btn-delete btn-sm float-right" onclick="hideCredForm()"><img class="icon" src="/img/cancel-24px.svg"/></button>
       </div>
     </div>
   </div>
@@ -164,8 +164,8 @@ function genAccordian(){
                   </tr>
                 </tbody>
               </table>
-              <button type="button" class="btn btn-save btn-sm mb-3" data-toggle="modal" data-target="#editCard" onclick="prepEditCard('${name}')"><img class="icon" src="/img/edit-24px.svg"/></button>
-              <button type="button" onclick="rmCred('${name}')" class="btn btn-delete btn-sm mb-3 float-right"><img class="icon" src="/img/delete-24px.svg"/></button>
+              <button type="button" class="btn btn-sgcustom btn-save btn-sm mb-3" data-toggle="modal" data-target="#editCard" onclick="prepEditCard('${name}')"><img class="icon" src="/img/edit-24px.svg"/></button>
+              <button type="button" onclick="rmCred('${name}')" class="btn btn-sgcustom btn-delete btn-sm mb-3 float-right"><img class="icon" src="/img/delete-24px.svg"/></button>
             </div>
           </div>
         </div>

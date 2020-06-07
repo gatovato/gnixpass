@@ -33,7 +33,7 @@ function newPassForm(){
         <input type="password" class="form-control" id="confpassword">
         <div class="invalid-feedback">Passwords do not match</div>
       </div>
-      <button type="button" class="btn btn-save btn-sm mt-3 float-right" onclick="createPass()"><img class="icon" src="/img/save-24px.svg"/></button>
+      <button type="button" class="btn btn-sgcustom btn-save btn-sm mt-3 float-right" onclick="createPass()"><img class="icon" src="/img/save-24px.svg"/></button>
   </div>
   `
   document.getElementById('auth-or-add').innerHTML = passForm;
@@ -47,11 +47,11 @@ function authForm(){
       <div class="invalid-feedback">Password is invalid</div>
       <div class="row">
         <div class="col-3">
-          <button type="button" class="btn btn-open btn-sm mt-3" onclick="openPass()"><img class="icon" src="/img/lock_open-24px.svg"/></button>
+          <button type="button" class="btn btn-sgcustom btn-open btn-sm mt-3" onclick="openPass()"><img class="icon" src="/img/lock_open-24px.svg"/></button>
         </div>
         <div class="col-6"></div>
         <div class="col-3">
-          <button type="button" class="btn btn-delete btn-sm mt-3 float-right" data-toggle="modal" data-target="#confirmRm"><img class="icon" src="/img/delete-24px.svg"/></button>
+          <button type="button" class="btn btn-sgcustom btn-delete btn-sm mt-3 float-right" data-toggle="modal" data-target="#confirmRm"><img class="icon" src="/img/delete-24px.svg"/></button>
         </div>
       </div>
   </div>

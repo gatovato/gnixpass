@@ -41,6 +41,12 @@ html body {
   border-color: #2e2e2e;
   box-shadow: none;
 }
+.btn-sgcustom:active{
+  border-color: #474747;
+}
+.btn-sgcustom:hover{
+  border-color: #474747;
+}
 .btn-home{
   background-color: #FFCC66;
 }

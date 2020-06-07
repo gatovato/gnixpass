@@ -26,7 +26,7 @@ function editView(){
         <button type="button" class="btn btn-sgcustom btn-home btn-sm float-right" onclick="exitEdit()"><img class="icon" src="/img/home-24px.svg"/></button>
       </div>
       <div class="col-3">
-        <button type="button" class="btn btn-sgcustom btn-save btn-sm float-right" onclick=""><img class="icon" src="/img/save-24px.svg"/></button>
+        <button type="button" class="btn btn-sgcustom btn-save btn-sm float-right" onclick="savePass()"><img class="icon" src="/img/save-24px.svg"/></button>
       </div>
       <div class="col-3">
         <button type="button" class="btn btn-sgcustom btn-add btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/img/add_box-24px.svg"/></button>
@@ -47,7 +47,7 @@ function editView(){
         <button type="button" class="btn btn-sgcustom btn-home btn-sm float-right" onclick="exitEdit()"><img class="icon" src="/img/home-24px.svg"/></button>
       </div>
       <div class="col-3">
-        <button type="button" class="btn btn-sgcustom btn-save btn-sm float-right" onclick=""><img class="icon" src="/img/save-24px.svg"/></button>
+        <button type="button" class="btn btn-sgcustom btn-save btn-sm float-right" onclick="savePass()"><img class="icon" src="/img/save-24px.svg"/></button>
       </div>
       <div class="col-3">
         <button type="button" class="btn btn-sgcustom btn-add btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/img/add_box-24px.svg"/></button>
@@ -239,5 +239,6 @@ function savePass(){
 
 function exitEdit(){
   passFile = '';
+  origPassFile = '';
   startView();
 }

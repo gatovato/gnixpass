@@ -23,7 +23,7 @@ function editView(){
     <div class="row mt-3">
       <div class="col-3"></div>
       <div class="col-3">
-        <button type="button" class="btn btn-home btn-sm float-right" onclick="startView()"><img class="icon" src="/img/home-24px.svg"/></button>
+        <button type="button" class="btn btn-home btn-sm float-right" onclick="exitEdit()"><img class="icon" src="/img/home-24px.svg"/></button>
       </div>
       <div class="col-3">
         <button type="button" class="btn btn-save btn-sm float-right" onclick=""><img class="icon" src="/img/save-24px.svg"/></button>
@@ -44,7 +44,7 @@ function editView(){
     <div class="row mt-3">
       <div class="col-3"></div>
       <div class="col-3">
-        <button type="button" class="btn btn-home btn-sm float-right" onclick=""><img class="icon" src="/img/home-24px.svg"/></button>
+        <button type="button" class="btn btn-home btn-sm float-right" onclick="exitEdit()"><img class="icon" src="/img/home-24px.svg"/></button>
       </div>
       <div class="col-3">
         <button type="button" class="btn btn-save btn-sm float-right" onclick=""><img class="icon" src="/img/save-24px.svg"/></button>
@@ -235,4 +235,9 @@ function editCard(tmpName){
 function savePass(){
   passwd = 'woa';
   let test = eel.savePass(origPassFile,passFile,passwd)();
+}
+
+function exitEdit(){
+  passFile = '';
+  startView();
 }

@@ -128,6 +128,13 @@ function rmCred(rmName){
   genAccordian();
 }
 
+//escape the password
+function cleanPassword(){
+  strToClean = {
+    '&':'&amp;'
+  }
+}
+
 //Generate accordian
 function genAccordian(){
   if(document.getElementById('credList')){
@@ -143,9 +150,7 @@ function genAccordian(){
         <div class="card">
           <div class="card-header" id="header${ct}">
             <h2 class="mb-0">
-              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse${ct}" aria-expanded="false" aria-controls="#collapse${ct}">
-                ${name}
-              </button>
+              <button id="name${ct}" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse${ct}" aria-expanded="false" aria-controls="#collapse${ct}"></button>
             </h2>
           </div>
           <div id="collapse${ct}" class="collapse" aria-labelledby="header${ct}" data-parent="#credList">
@@ -156,11 +161,11 @@ function genAccordian(){
                 <tbody>
                   <tr>
                     <th scope="row">Username</th>
-                    <td>${key}</td>
+                    <td id="user${ct}"></td>
                   </tr>
                   <tr>
                     <th scope="row">Password</th>
-                    <td>${passFile[name][key]}</td>
+                    <td id="pass${ct}"></td>
                   </tr>
                 </tbody>
               </table>
@@ -172,6 +177,9 @@ function genAccordian(){
         `;
         card = addHTMLString(tmpStr);
         document.getElementById('credList').appendChild(card);
+        document.getElementById('name'+ct).innerText = name;
+        document.getElementById('user'+ct).innerText = key;
+        document.getElementById('pass'+ct).innerText = passFile[name][key];
         ct++;
     }
   }

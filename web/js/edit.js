@@ -123,7 +123,8 @@ function addCred(){
 }
 
 //Remove credentials from passFile
-function rmCred(rmName){
+function rmCred(tmp){
+  rmName = nameMap[tmp];
   delete passFile[rmName];
   genAccordian();
 }
@@ -169,13 +170,14 @@ function genAccordian(){
                   </tr>
                 </tbody>
               </table>
-              <button type="button" class="btn btn-sgcustom btn-save btn-sm mb-3" data-toggle="modal" data-target="#editCard" onclick="prepEditCard('${name}')"><img class="icon" src="/img/edit-24px.svg"/></button>
-              <button type="button" onclick="rmCred('${name}')" class="btn btn-sgcustom btn-delete btn-sm mb-3 float-right"><img class="icon" src="/img/delete-24px.svg"/></button>
+              <button type="button" class="btn btn-sgcustom btn-save btn-sm mb-3" data-toggle="modal" data-target="#editCard" onclick="prepEditCard('name${ct}')"><img class="icon" src="/img/edit-24px.svg"/></button>
+              <button type="button" onclick="rmCred('name${ct}')" class="btn btn-sgcustom btn-delete btn-sm mb-3 float-right"><img class="icon" src="/img/delete-24px.svg"/></button>
             </div>
           </div>
         </div>
         `;
         card = addHTMLString(tmpStr);
+        nameMap["name" + ct] = name;
         document.getElementById('credList').appendChild(card);
         document.getElementById('name'+ct).innerText = name;
         document.getElementById('user'+ct).innerText = key;
@@ -185,7 +187,8 @@ function genAccordian(){
   }
 }
 
-function prepEditCard(tmpName){
+function prepEditCard(tmp){
+  tmpName = nameMap[tmp];
   var tmpTitle = `Edit ${tmpName}`;
   document.getElementById('editCardTitle').innerHTML = tmpTitle;
   var tmpCardForm = `
@@ -205,7 +208,7 @@ function prepEditCard(tmpName){
     </div>
     `;
   document.getElementById('editCardBody').innerHTML = tmpCardForm;
-  var tmpFunct = `editCard('${tmpName}')`;
+  var tmpFunct = `editCard('${tmp}')`;
   document.getElementById('editCardSave').setAttribute("onclick",tmpFunct);
   document.getElementById('card-cred-name').value = tmpName;
   for(key in passFile[tmpName]){
@@ -215,7 +218,8 @@ function prepEditCard(tmpName){
   }
 }
 
-function editCard(tmpName){
+function editCard(tmp){
+  tmpName = nameMap[tmp];
   entryName = document.getElementById('card-cred-name');
   user = document.getElementById('card-cred-username').value;
   pass = document.getElementById('card-cred-password').value;
@@ -283,5 +287,8 @@ async function savePass(){
 function exitEdit(){
   passFile = '';
   origPassFile = '';
+  nameMap = {};
   startView();
 }
+
+nameMap = {};

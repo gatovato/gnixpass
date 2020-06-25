@@ -5,8 +5,7 @@ A graphical port of my cli key store utility.
 
 ## Important Note
 
-master is actively in development and deemed unstable. Stay tuned for release
-
+Application is functional, testing is currently underway. Test away if you want.
 
 ## Built With
 

@@ -19,9 +19,9 @@ gnix_home = user_home + '.gnixpass'
 
 eel.init('web')
 
- ######################
- # Internal Functions #
- ######################
+######################
+# Internal Functions #
+######################
 
 def padData(data):
     padder = padding.PKCS7(128).padder()
@@ -59,9 +59,9 @@ def decrypt(password,data):
     return unpadded_data.decode()
 
 
- ######################
- # External Functions #
- ######################
+######################
+# External Functions #
+######################
 
 #Populate Home page dropdown
 @eel.expose
@@ -73,6 +73,7 @@ def getPasses():
         os.mkdir(gnix_home)
         return []
 
+#Create pass with blank JSON string, encrypt
 @eel.expose
 def createPass(name,passwd):
     my_data = encrypt(passwd,'{}')
@@ -87,6 +88,7 @@ def createPass(name,passwd):
         my_file.close()
     return error
 
+#Open file with password if exists
 @eel.expose
 def openPass(name,passwd):
     file_path = gnix_home + '/' + name
@@ -104,6 +106,7 @@ def openPass(name,passwd):
         return data
     return data
 
+#Remove passFile with password if exists
 @eel.expose
 def rmPass(name,passwd):
     file_path = gnix_home + '/' + name
@@ -127,6 +130,7 @@ def rmPass(name,passwd):
     data = 'success'
     return data
 
+#Save passFile with password
 @eel.expose
 def savePass(name,user_data,passwd):
     my_data = encrypt(passwd,user_data)

@@ -14,7 +14,7 @@ function prepStartView(){
   document.getElementById('template').innerHTML = startForm;
 }
 
-
+//Generate form for creating a new passFile
 function newPassForm(){
   var passForm = `
   <div id="newPass">
@@ -39,6 +39,7 @@ function newPassForm(){
   document.getElementById('auth-or-add').innerHTML = passForm;
 }
 
+//Get the passFile's password
 function authForm(){
   var authForm = `
   <div>
@@ -114,7 +115,7 @@ async function createPass(){
   }
 }
 
-//send to eel for authentication and deletion
+//Send to eel for authentication and deletion
 async function rmPass(){
   name = document.getElementById('pass-files').value;
   passwd = document.getElementById('password').value;

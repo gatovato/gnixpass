@@ -129,13 +129,6 @@ function rmCred(tmp){
   genAccordian();
 }
 
-//escape the password
-function cleanPassword(){
-  strToClean = {
-    '&':'&amp;'
-  }
-}
-
 //Generate accordian
 function genAccordian(){
   if(document.getElementById('credList')){
@@ -187,6 +180,7 @@ function genAccordian(){
   }
 }
 
+//Generate form for modal
 function prepEditCard(tmp){
   tmpName = nameMap[tmp];
   var tmpTitle = `Edit ${tmpName}`;
@@ -218,6 +212,7 @@ function prepEditCard(tmp){
   }
 }
 
+//Get current values from passFile
 function editCard(tmp){
   tmpName = nameMap[tmp];
   entryName = document.getElementById('card-cred-name');
@@ -244,11 +239,39 @@ function editCard(tmp){
   $('#editCard').modal('toggle');
 }
 
+//Remove sensitive data from modal
+function cleanEditCard(){
+  entryName = document.getElementById('card-cred-name');
+  user = document.getElementById('card-cred-username');
+  pass = document.getElementById('card-cred-password');
+  conf = document.getElementById('card-cred-conf-password');
+  if(pass){
+    if(pass.classList.contains('is-invalid')){
+      pass.classList.remove('is-invalid');
+    }
+    pass.value = '';
+  }
+  if(conf){
+    if(conf.classList.contains('is-invalid')){
+      conf.classList.remove('is-invalid');
+    }
+    conf.value = '';
+  }
+  if(entryName){
+    entryName.value = '';
+  }
+  if(user){
+    user.value = '';
+  }
+}
+
+//Set save function's value to current passFile
 function prepSaveModal(){
   var tmpFunct = `savePass('${origPassFile}')`;
   document.getElementById('savePassSave').setAttribute("onclick",tmpFunct);
 }
 
+//Remove sensitive data
 function cleanSaveModal(){
   pass = document.getElementById('savePassword');
   conf = document.getElementById('confSavePassword');
@@ -262,6 +285,7 @@ function cleanSaveModal(){
   conf.value = '';
 }
 
+//Grab values send to eel, clean up
 async function savePass(){
   pass = document.getElementById('savePassword');
   conf = document.getElementById('confSavePassword');
@@ -279,16 +303,20 @@ async function savePass(){
   }
   $('#savePass').modal('toggle');
   cleanSaveModal();
+  cleanEditCard();
   passFile = '';
   origPassFile = '';
   startView();
 }
 
+//Clean up get out of dodge
 function exitEdit(){
+  cleanEditCard()
   passFile = '';
   origPassFile = '';
   nameMap = {};
   startView();
 }
 
+//used for handling borky data
 nameMap = {};

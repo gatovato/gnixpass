@@ -1,6 +1,6 @@
 # gnixpass
 
-A graphical port of my cli key store utility.
+A graphical port of my cli password storage utility.
 
 
 ## Important Note

@@ -7,6 +7,7 @@
 import os
 import base64
 import json
+import random
 import eel
 from pathlib import Path
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
@@ -145,6 +146,22 @@ def savePass(name,user_data,passwd):
         my_file.close()
     return error
 
+#Generate random password
+@eel.expose
+def passGen(length,special):
+    caps = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+    lowers = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+    symbols = ['!','@','$','%','^','*','~','+','_','-','(',')','?','>','<']
+    numbers = ['1','2','3','4','5','6','7','8','9','0']
+
+    pass_list = []
+
+    if special == 'Yes':
+        pass_list = caps + lowers + numbers + symbols
+    else:
+        pass_list = caps + lowers + numbers
+
+    return(''.join(random.sample(pass_list,int(length))))
 
 #Runtime
 eel.start('index.html',mode='chrome')

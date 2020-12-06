@@ -69,7 +69,7 @@ async function getPasses() {
 
   let n = await eel.getPasses()(); // Must prefix call with 'await', otherwise it's the same syntax
   if(n.length > 0){
-    passes = document.getElementById("pass-files");
+    var passes = document.getElementById("pass-files");
     for(i=0;i<n.length;i++){
       var option = document.createElement("option");
       option.text = n[i];
@@ -81,7 +81,7 @@ async function getPasses() {
     authForm();
   }
   if(n.length == 0){
-    passes = document.getElementById("pass-files");
+    var passes = document.getElementById("pass-files");
     var option = document.createElement("option");
     option.text = "Add a new pass";
     passes.add(option);
@@ -91,10 +91,10 @@ async function getPasses() {
 
 //One of the two actions when using the dropdown
 async function createPass(){
-  passForm = document.querySelector('#newPass');
-  passName = document.querySelector('#passName');
-  pass = document.querySelector('#password');
-  conf = document.querySelector('#confpassword');
+  var passForm = document.querySelector('#newPass');
+  var passName = document.querySelector('#passName');
+  var pass = document.querySelector('#password');
+  var conf = document.querySelector('#confpassword');
   if (pass.value == '' && conf.value == ''){
     pass.classList.add('is-invalid');
     return;
@@ -117,8 +117,8 @@ async function createPass(){
 
 //Send to eel for authentication and deletion
 async function rmPass(){
-  name = document.getElementById('pass-files').value;
-  passwd = document.getElementById('password').value;
+  var name = document.getElementById('pass-files').value;
+  var passwd = document.getElementById('password').value;
   let status = await eel.rmPass(name,passwd)();
   if(status == "decrypt_failed"){
     document.getElementById('password').classList.add("is-invalid");
@@ -137,9 +137,9 @@ async function rmPass(){
 
  //Send credentials to eel, if good send to next js, if bad validate
 async function openPass(){
-  name = document.getElementById('pass-files').value;
+  var name = document.getElementById('pass-files').value;
   origPassFile = name
-  passwd = document.getElementById('password').value;
+  var passwd = document.getElementById('password').value;
   let contents = await eel.openPass(name,passwd)();
   if(contents == "open_failed"){
     alert('Unknown error opening password file');
@@ -159,7 +159,7 @@ function startView(){
   var origPassFile = '';
   var passFile = '';
   //Change between create pass and authenticate screens
-  dropDown = document.getElementById("pass-files");
+  var dropDown = document.getElementById("pass-files");
   dropDown.addEventListener('change',function(event){
       var myValue = event.srcElement.value;
       if(myValue != "Add a new pass"){

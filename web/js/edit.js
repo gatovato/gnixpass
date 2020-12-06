@@ -21,7 +21,6 @@ function editView(){
   if(Object.keys(passFile).length === 0){
     var tmpHTML = `
     <div class="row mt-3">
-      <div class="col-3"></div>
       <div class="col-3">
         <button type="button" class="btn btn-sgcustom btn-home btn-sm float-right" onclick="exitEdit()"><img class="icon" src="/img/home-24px.svg"/></button>
       </div>
@@ -30,6 +29,9 @@ function editView(){
       </div>
       <div class="col-3">
         <button type="button" class="btn btn-sgcustom btn-add btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/img/add_box-24px.svg"/></button>
+      </div>
+      <div class="col-3">
+        <button type="button" class="btn btn-sgcustom btn-open btn-sm float-right" data-toggle="modal" data-target="#pass-gen-form"><img class="icon" src="/img/build-24px.svg"/></button>
       </div>
     </div>
     `
@@ -42,7 +44,6 @@ function editView(){
   }else{
     var tmpHTML = `
     <div class="row mt-3">
-      <div class="col-3"></div>
       <div class="col-3">
         <button type="button" class="btn btn-sgcustom btn-home btn-sm float-right" onclick="exitEdit()"><img class="icon" src="/img/home-24px.svg"/></button>
       </div>
@@ -51,6 +52,9 @@ function editView(){
       </div>
       <div class="col-3">
         <button type="button" class="btn btn-sgcustom btn-add btn-sm float-right" onclick="addCredForm()"><img class="icon" src="/img/add_box-24px.svg"/></button>
+      </div>
+      <div class="col-3">
+        <button type="button" class="btn btn-sgcustom btn-open btn-sm float-right" data-toggle="modal" data-target="#pass-gen-form"><img class="icon" src="/img/build-24px.svg"/></button>
       </div>
     </div>
     `
@@ -76,10 +80,10 @@ function addCredForm(){
     <label for="cred-username" class="mt-1">Username</label>
     <input id="cred-username" class="form-control" type="text">
     <label for="cred-password" class="mt-1">Password</label>
-    <input id="cred-password" type="password" class="form-control">
+    <input id="cred-password" type="text" class="form-control">
     <div>
       <label for="cred-conf-password" class="mt-1">Confirm Password</label>
-      <input id="cred-conf-password" type="password" class="form-control">
+      <input id="cred-conf-password" type="text" class="form-control">
       <div class="invalid-feedback">Passwords do not match</div>
     </div>
     <div class="row mt-3">
@@ -103,10 +107,10 @@ function hideCredForm(){
 
 //Add credentials to pass file
 function addCred(){
-  entryName = document.getElementById('cred-name');
-  user = document.getElementById('cred-username').value;
-  pass = document.getElementById('cred-password').value;
-  conf = document.getElementById('cred-conf-password');
+  var entryName = document.getElementById('cred-name');
+  var user = document.getElementById('cred-username').value;
+  var pass = document.getElementById('cred-password').value;
+  var conf = document.getElementById('cred-conf-password');
   if (pass != conf.value){
     conf.classList.add('is-invalid');
     return;
@@ -115,7 +119,7 @@ function addCred(){
     entryName.classList.add('is-invalid');
     return;
   }
-  smolObj = {};
+  var smolObj = {};
   smolObj[user] = pass;
   passFile[entryName.value] = smolObj;
   hideCredForm();
@@ -124,7 +128,7 @@ function addCred(){
 
 //Remove credentials from passFile
 function rmCred(tmp){
-  rmName = nameMap[tmp];
+  var rmName = nameMap[tmp];
   delete passFile[rmName];
   genAccordian();
 }
@@ -134,17 +138,17 @@ function genAccordian(){
   if(document.getElementById('credList')){
     document.getElementById('credList').remove();
   }
-  accordianStr = '<div class="accordion col-12" id="credList"></div>';
-  accordian = addHTMLString(accordianStr);
+  var accordianStr = '<div class="accordion col-12" id="credList"></div>';
+  var accordian = addHTMLString(accordianStr);
   document.getElementById('creds-panel').appendChild(accordian);
-  ct = 0;
+  var ct = 0;
   for(name in passFile){
     for(key in passFile[name]){
         tmpStr = `
         <div class="card">
           <div class="card-header" id="header${ct}">
             <h2 class="mb-0">
-              <button id="name${ct}" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse${ct}" aria-expanded="false" aria-controls="#collapse${ct}"></button>
+              <button id="name${ct}" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse${ct}" aria-expanded="false" aria-controls="#collapse${ct}" style="width:100%;text-align:left"></button>
             </h2>
           </div>
           <div id="collapse${ct}" class="collapse" aria-labelledby="header${ct}" data-parent="#credList">
@@ -169,7 +173,7 @@ function genAccordian(){
           </div>
         </div>
         `;
-        card = addHTMLString(tmpStr);
+        var card = addHTMLString(tmpStr);
         nameMap["name" + ct] = name;
         document.getElementById('credList').appendChild(card);
         document.getElementById('name'+ct).innerText = name;
@@ -182,7 +186,7 @@ function genAccordian(){
 
 //Generate form for modal
 function prepEditCard(tmp){
-  tmpName = nameMap[tmp];
+  var tmpName = nameMap[tmp];
   var tmpTitle = `Edit ${tmpName}`;
   document.getElementById('editCardTitle').innerHTML = tmpTitle;
   var tmpCardForm = `
@@ -194,10 +198,10 @@ function prepEditCard(tmp){
     <label for="card-cred-username" class="mt-1">Username</label>
     <input id="card-cred-username" class="form-control" type="text">
     <label for="card-cred-password" class="mt-1">Password</label>
-    <input id="card-cred-password" type="password" class="form-control">
+    <input id="card-cred-password" type="text" class="form-control">
     <div>
       <label for="card-cred-conf-password" class="mt-1">Confirm Password</label>
-      <input id="card-cred-conf-password" type="password" class="form-control">
+      <input id="card-cred-conf-password" type="text" class="form-control">
       <div class="invalid-feedback">Passwords do not match</div>
     </div>
     `;
@@ -214,11 +218,11 @@ function prepEditCard(tmp){
 
 //Get current values from passFile
 function editCard(tmp){
-  tmpName = nameMap[tmp];
-  entryName = document.getElementById('card-cred-name');
-  user = document.getElementById('card-cred-username').value;
-  pass = document.getElementById('card-cred-password').value;
-  conf = document.getElementById('card-cred-conf-password');
+  var tmpName = nameMap[tmp];
+  var entryName = document.getElementById('card-cred-name');
+  var user = document.getElementById('card-cred-username').value;
+  var pass = document.getElementById('card-cred-password').value;
+  var conf = document.getElementById('card-cred-conf-password');
   if (pass != conf.value){
     conf.classList.add('is-invalid');
     return;
@@ -227,7 +231,7 @@ function editCard(tmp){
     entryName.classList.add('is-invalid');
     return;
   }
-  smolObj = {};
+  var smolObj = {};
   smolObj[user] = pass;
   if(entryName.value == tmpName){
     passFile[tmpName] = smolObj;
@@ -239,12 +243,23 @@ function editCard(tmp){
   $('#editCard').modal('toggle');
 }
 
+//Generate Password
+
+async function passGen(){
+    var length = document.getElementById('pass-gen-length').value;
+    var special = document.getElementById('special-characters').value;
+    let newPass = await eel.passGen(length,special)();
+    if(newPass != ''){
+      document.getElementById('pass-gen-out').value = newPass;
+    }
+}
+
 //Remove sensitive data from modal
 function cleanEditCard(){
-  entryName = document.getElementById('card-cred-name');
-  user = document.getElementById('card-cred-username');
-  pass = document.getElementById('card-cred-password');
-  conf = document.getElementById('card-cred-conf-password');
+  var entryName = document.getElementById('card-cred-name');
+  var user = document.getElementById('card-cred-username');
+  var pass = document.getElementById('card-cred-password');
+  var conf = document.getElementById('card-cred-conf-password');
   if(pass){
     if(pass.classList.contains('is-invalid')){
       pass.classList.remove('is-invalid');
@@ -263,18 +278,20 @@ function cleanEditCard(){
   if(user){
     user.value = '';
   }
+  document.getElementById('pass-gen-out').value = '';
 }
 
 //Set save function's value to current passFile
 function prepSaveModal(){
   var tmpFunct = `savePass('${origPassFile}')`;
   document.getElementById('savePassSave').setAttribute("onclick",tmpFunct);
+  document.getElementById('savePassTitle').innerText = origPassFile;
 }
 
 //Remove sensitive data
 function cleanSaveModal(){
-  pass = document.getElementById('savePassword');
-  conf = document.getElementById('confSavePassword');
+  var pass = document.getElementById('savePassword');
+  var conf = document.getElementById('confSavePassword');
   if(pass.classList.contains('is-invalid')){
     pass.classList.remove('is-invalid');
   }
@@ -287,8 +304,8 @@ function cleanSaveModal(){
 
 //Grab values send to eel, clean up
 async function savePass(){
-  pass = document.getElementById('savePassword');
-  conf = document.getElementById('confSavePassword');
+  var pass = document.getElementById('savePassword');
+  var conf = document.getElementById('confSavePassword');
   if(!pass.value && !conf.value){
     pass.classList.add('is-invalid');
     return;

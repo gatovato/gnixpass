@@ -75,6 +75,32 @@
         </div>
       </div>
     </div>
+    <div id="pass-gen-form" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="pass-gen-title" class="modal-title">Generate Password</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="pass-gen-body" class="modal-body">
+            <label for="pass-gen-length" class="mt-1">Length</label>
+            <input type="number" class="form-control" id="pass-gen-length" style="width:30%">
+            <label for="special-characters" class="mt-1">Special Characters</label>
+            <select class="form-control" id="special-characters" style="width:30%">
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+            <input type="text" class="form-control" id="pass-gen-out" style="margin-top:1em">
+          </div>
+          <div class="modal-footer">
+            <button  id="pass-gen-save" type="button" class="btn btn-sgcustom btn-open" onclick="passGen()"><img class="icon" src="/img/build-24px.svg"/></button>
+            <button type="button" class="btn btn-sgcustom btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <nav class="navbar navbar-dark bg-dark">
       <img src="/img/gnixpass.png" class="img-fluid mx-auto"/>
     </nav>

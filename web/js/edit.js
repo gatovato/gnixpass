@@ -8,9 +8,7 @@ function addHTMLString(tmpStr){
 //Create skeleton for Edit View
 function prepEditView(){
   var startEdit =`
-  <div id="edit-container">
-    <div id="creds-panel" class="row"></div>
-  </div>
+  <div id="edit-container"></div>
   `
   document.getElementById('template').innerHTML = startEdit;
 }
@@ -20,7 +18,7 @@ function editView(){
   prepEditView();
   if(Object.keys(passFile).length === 0){
     var tmpHTML = `
-    <div class="row mt-3">
+    <div class="row mb-3">
       <div class="col-3">
         <button type="button" class="btn btn-sgcustom btn-home btn-sm float-right" onclick="exitEdit()"><img class="icon" src="/img/home-24px.svg"/></button>
       </div>
@@ -43,7 +41,7 @@ function editView(){
     document.getElementById('edit-container').appendChild(addForm);
   }else{
     var tmpHTML = `
-    <div class="row mt-3">
+    <div class="row mb-3">
       <div class="col-3">
         <button type="button" class="btn btn-sgcustom btn-home btn-sm float-right" onclick="exitEdit()"><img class="icon" src="/img/home-24px.svg"/></button>
       </div>
@@ -61,7 +59,7 @@ function editView(){
     var addButton = addHTMLString(tmpHTML);
     document.getElementById('edit-container').appendChild(addButton);
 
-    var tmpHTML = '<div id="add-form" class="row"></div>';
+    var tmpHTML = '<div id="add-form" class="row mb-3"></div>';
     var addForm = addHTMLString(tmpHTML);
     document.getElementById('edit-container').appendChild(addForm);
     genAccordian();
@@ -133,14 +131,19 @@ function rmCred(tmp){
   genAccordian();
 }
 
+//Mask password
+function maskPass(passLen){
+  return '&#8226;'.repeat(passLen);
+}
+
 //Generate accordian
 function genAccordian(){
   if(document.getElementById('credList')){
     document.getElementById('credList').remove();
   }
-  var accordianStr = '<div class="accordion col-12" id="credList"></div>';
-  var accordian = addHTMLString(accordianStr);
-  document.getElementById('creds-panel').appendChild(accordian);
+  var credsPanelStr = '<div id="creds-panel" class="row"><div class="accordion col-12" id="credList"></div></div>';
+  var credsPanel = addHTMLString(credsPanelStr);
+  document.getElementById('edit-container').appendChild(credsPanel);
   var ct = 0;
   for(name in passFile){
     for(key in passFile[name]){
@@ -178,7 +181,7 @@ function genAccordian(){
         document.getElementById('credList').appendChild(card);
         document.getElementById('name'+ct).innerText = name;
         document.getElementById('user'+ct).innerText = key;
-        document.getElementById('pass'+ct).innerText = passFile[name][key];
+        document.getElementById('pass'+ct).innerHTML = maskPass(25);
         ct++;
     }
   }

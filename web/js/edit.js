@@ -136,6 +136,16 @@ function maskPass(passLen){
   return '&#8226;'.repeat(passLen);
 }
 
+//Copy to clipboard
+async function copyPass(ele) {
+  try {
+    var pass = ele.parentElement.querySelector('input').value;
+    await navigator.clipboard.writeText(pass);
+  } catch (err) {
+    alert('Failed to Copy Password');
+  }
+}
+
 //Generate accordian
 function genAccordian(){
   if(document.getElementById('credList')){
@@ -166,7 +176,7 @@ function genAccordian(){
                   </tr>
                   <tr>
                     <th scope="row">Password</th>
-                    <td id="pass${ct}"></td>
+                    <td><code id="pass${ct}"></code><input id="pass_val${ct}" type="text" style="display:none"><button type="button" onclick="copyPass(this)" class="btn btn-sgcustom btn-sm" style="margin-left:1em;"><img class="icon" src="/img/content_copy-24px.svg"/></button></td>
                   </tr>
                 </tbody>
               </table>
@@ -182,6 +192,7 @@ function genAccordian(){
         document.getElementById('name'+ct).innerText = name;
         document.getElementById('user'+ct).innerText = key;
         document.getElementById('pass'+ct).innerHTML = maskPass(25);
+        document.getElementById('pass_val'+ct).value = passFile[name][key];
         ct++;
     }
   }
@@ -215,7 +226,7 @@ function prepEditCard(tmp){
   for(key in passFile[tmpName]){
       document.getElementById('card-cred-username').value = key;
       document.getElementById('card-cred-password').value = passFile[tmpName][key];
-      document.getElementById('card-cred-conf-password').value = passFile[tmpName][key];
+      //document.getElementById('card-cred-conf-password').value = passFile[tmpName][key];
   }
 }
 

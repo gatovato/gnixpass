@@ -146,6 +146,16 @@ async function copyPass(ele) {
   }
 }
 
+//Copy to clipboard
+async function copyUser(ele) {
+  try {
+    var user = ele.parentElement.parentElement.querySelector('span').innerText;
+    await navigator.clipboard.writeText(user);
+  } catch (err) {
+    alert('Failed to Copy Username');
+  }
+}
+
 //Generate accordian
 function genAccordian(){
   if(document.getElementById('credList')){
@@ -172,11 +182,11 @@ function genAccordian(){
                 <tbody>
                   <tr>
                     <th scope="row">Username</th>
-                    <td id="user${ct}"></td>
+                    <td><span id="user${ct}"></span></td><td><button type="button" onclick="copyUser(this)" class="btn btn-sgcustom btn-sm" style="margin-left:1em;"><img class="icon" src="/img/content_copy-24px.svg"/></button></td>
                   </tr>
                   <tr>
                     <th scope="row">Password</th>
-                    <td><code id="pass${ct}"></code><input id="pass_val${ct}" type="text" style="display:none"><button type="button" onclick="copyPass(this)" class="btn btn-sgcustom btn-sm" style="margin-left:1em;"><img class="icon" src="/img/content_copy-24px.svg"/></button></td>
+                    <td id="pass${ct}"></td><td><input id="pass_val${ct}" type="text" style="display:none"><button type="button" onclick="copyPass(this)" class="btn btn-sgcustom btn-sm" style="margin-left:1em;"><img class="icon" src="/img/content_copy-24px.svg"/></button></td>
                   </tr>
                 </tbody>
               </table>
